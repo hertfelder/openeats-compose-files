@@ -1,0 +1,17 @@
+web container:
+
+Memory (1G) is not enough to run the full set and simultaneously compile the web
+sources with "web" container. Therefore, use docker compose file web-docker-prod.yml
+to compile source files and docker compose file docker-compose.yml to run
+api, db and nginx.
+
+reverse proxy:
+
+Do not forget to add traefik to openeats network:
+$ docker network connect openeats_default <name of traefik container>
+
+DB persistence:
+
+In original OpenEats sources, the database volume is not mounted in the db
+container. Thus, the db will be lost when the container is removed. Do not
+forget to add the volume to the db container in the docker compose file.
